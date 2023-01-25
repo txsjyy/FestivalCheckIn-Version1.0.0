@@ -1,5 +1,6 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
+#secrets
+/sunny-emissary-375204-56b2dcfe238c.json
 # dependencies
 /node_modules
 /.pnp
