@@ -1,18 +1,30 @@
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 
-export  async function getServerSideProps() {
-    // auth
-    const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
+export  async function getServerSideProps({query}) {
+    // authorization
+    const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
     const sheets = google.sheets({ version: 'v4', auth });
   
-    // query
+    // query read data for sheets, grabbing everything from name to id
     const range = 'test!D2:J302';
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: process.env.SHEET_ID,
       range,
     });
-    // result
+
+    //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
+    const sheet_row = String(Number(query.info)+2);
+    await sheets.spreadsheets.values.append({
+        spreadsheetId: process.env.SHEET_ID,
+        range: "test!K"+sheet_row,
+        valueInputOption: "USER_ENTERED",
+        resource:{
+            values: [[true]]
+        },
+    })
+
+    // return the data 
     const data = response.data.values;
     return {
       props: {
@@ -21,14 +33,11 @@ export  async function getServerSideProps() {
     };
   }
 
-
-
-
 export default function Details({data}){
     const router = useRouter();
-    const row = Number(router.query.info);
-    const name = data[row][0];
-    const lottery_id = data[row][6];
+    const row = Number(router.query.info); //row number of the user's information
+    const name = data[row][0];//grab the user's name for greeting message
+    const lottery_id = data[row][6]; //grab the user's lottery number
 
     //console.log(data[row]);
     return(

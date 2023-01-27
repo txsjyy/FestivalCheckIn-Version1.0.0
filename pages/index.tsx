@@ -24,7 +24,7 @@ export  async function getServerSideProps() {
 
 export default function Home({ data }) {
   const [input, setValue] = useState('');
-  const [match, setMatch] = useState('');
+  const [match, setMatch] = useState(false);
   const router = useRouter();
   let redirect_url = "/";
 
@@ -37,15 +37,15 @@ export default function Home({ data }) {
 
     console.log(data);
 
-    //check match
+    //check match for lottery number, if found then redirect
     for (let i = 0; i < data.length; i++) {
       if (data[i][0] === input) {
-        setMatch(data[i][1]);
+        setMatch(true);
         redirect_url += input;
         router.push({
           pathname: redirect_url,
           query:{
-            info: i
+            info: (i)
           }
         });
       }
@@ -69,9 +69,9 @@ export default function Home({ data }) {
         </button>
       </form>
       {match ? (
-        <p>Match found: {match}</p>
+        <p>签到成功！跳转中……</p>
       ) : (
-        <p>No match found</p>
+        <p>没有发现您的记录捏🤏</p>
       )}
     </div>
   );
