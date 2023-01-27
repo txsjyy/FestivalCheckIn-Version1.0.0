@@ -25,7 +25,6 @@ export  async function getServerSideProps() {
 export default function Home({ data }) {
   const [input, setValue] = useState('');
   const [match, setMatch] = useState('');
-  const [row, setRow] = useState(0);
   const router = useRouter();
   let redirect_url = "/";
 
@@ -43,8 +42,12 @@ export default function Home({ data }) {
       if (data[i][0] === input) {
         setMatch(data[i][1]);
         redirect_url += input;
-        setRow(i);
-        router.push(redirect_url);
+        router.push({
+          pathname: redirect_url,
+          query:{
+            info: i
+          }
+        });
       }
     }
   };
