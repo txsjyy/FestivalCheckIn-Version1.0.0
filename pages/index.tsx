@@ -1,7 +1,8 @@
+import React, { use, useState } from 'react';
 import { google } from 'googleapis';
-import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
-export async function getServerSideProps() {
+export  async function getServerSideProps() {
   // auth
   const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
@@ -24,6 +25,9 @@ export async function getServerSideProps() {
 export default function Home({ data }) {
   const [input, setValue] = useState('');
   const [match, setMatch] = useState('');
+  const [row, setRow] = useState(0);
+  const router = useRouter();
+  let redirect_url = "/";
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -38,10 +42,9 @@ export default function Home({ data }) {
     for (let i = 0; i < data.length; i++) {
       if (data[i][0] === input) {
         setMatch(data[i][1]);
-        break;
-      }
-      if(i == data.length-1){
-        setMatch("No record found");
+        redirect_url += input;
+        setRow(i);
+        router.push(redirect_url);
       }
     }
   };
