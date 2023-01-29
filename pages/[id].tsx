@@ -22,13 +22,19 @@ export  async function getServerSideProps(context:any) {
 
   //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
   const sheet_row = String(Number(context.query.info)+2);
+  let value = [true];
+  const request_body = {
+    "range": "test!K"+sheet_row,
+    "values": [
+      value
+    ]
+  }
   await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.SHEET_ID,
       range: "test!K"+sheet_row,
       valueInputOption: "USER_ENTERED",
-      resource:{
-          values: [[true]]
-      },
+      requestBody: request_body,
+      
   })
 
   // return the data 
