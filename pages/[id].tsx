@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import {Nav} from './layout';
 
-export  async function getServerSideProps(context) {  
+export  async function getServerSideProps(context:any) {  
   // authorization
   const auth = await google.auth.getClient({ 
     credentials:{
