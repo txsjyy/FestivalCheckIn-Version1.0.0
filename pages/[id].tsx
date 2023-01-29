@@ -42,8 +42,12 @@ export default function Details({data}){
     //console.log(data[row]);
     return(
         <div className='container'>
-            <h1>Hello {name}</h1>
-            <h2>Your lottery number is {lottery_id} </h2>
+            <h1>您好 {name}</h1>
+            {lottery_id ?
+                (<h2>您的抽奖号码是： {lottery_id} </h2>) 
+                : (<h2>暂时没有抽奖号喔～</h2>)
+            }
+            
         </div>
     );
 }

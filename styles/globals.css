@@ -1,25 +1,3 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.input-field {
-  padding: 10px;
-  font-size: 18px;
-  width: 300px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  margin-right: 10px;
-}
-
-.submit-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

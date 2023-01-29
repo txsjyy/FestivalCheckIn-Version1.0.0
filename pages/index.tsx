@@ -24,7 +24,7 @@ export  async function getServerSideProps() {
 
 export default function Home({ data }) {
   const [input, setValue] = useState('');
-  const [match, setMatch] = useState(false);
+  const [match, setMatch] = useState(true);
   const router = useRouter();
   let redirect_url = "/";
 
@@ -45,34 +45,45 @@ export default function Home({ data }) {
         router.push({
           pathname: redirect_url,
           query:{
-            info: (i)
+            info: (i+2)
           }
         });
       }
     }
+
+    setMatch(false);
   };
 
   return (
-    <div className="container">
-      <form onSubmit={handleSubmit}>
-        <input
-          className="input-field"
-          type="text"
-          pattern="[0-9A-Za-z!@#\$%\^&\*]{4}"
-          minLength="4"
-          value={input}
-          onChange={handleChange}
-          placeholder="Enter 4-digit code"
-        />
-        <button className="submit-button" type="submit">
-          Submit
-        </button>
-      </form>
-      {match ? (
-        <p>签到成功！跳转中……</p>
-      ) : (
-        <p>没有发现您的记录捏🤏</p>
-      )}
+    <div className='bg-gradient-to-tl from-rose-400 to-orange-300 h-screen flex justify-center items-center'>
+      <div className="container w-full max-w-xs bg-white bg-opacity-50 mx-auto shadow-md">
+        <form className="justify-center items-center rounded px-8 pt-6 pb-8 mb-4">
+            <div className="mb-4">
+              <label className=" block text-gray-700 text-lg font-bold mb-2 pb-2">
+              请输入4位数邀请码
+              </label>
+              <input className="shadow appearance-none border py-2 px-3 leading-tight focus:outline-none focus:shadow-outline rounded-lg p-2 text-xl text-red-800 w-48 outline outline-offset-2 outline-2 outline-red-800"
+              type="text"
+              pattern="[0-9A-Za-z!@#\$%\^&\*]{4}"
+              minLength="4"
+              value={input}
+              onChange={handleChange}></input>
+            </div>
+            <div className="flex items-center justify-between">
+              <button className="bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                提交
+              </button>
+              <a className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600" href="#">
+                没有注册？点击这里
+              </a>
+            </div>
+        </form>
+        {match ? (
+          <p></p>
+        ) : (
+          <p className="text-red-500 text-center">没有发现您的记录捏🤏</p>
+        )}
+      </div>
     </div>
   );
 }
