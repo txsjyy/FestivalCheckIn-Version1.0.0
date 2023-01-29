@@ -55,7 +55,7 @@ export default function Details({data}:any){
     const router = useRouter();
     const row = Number(router.query.info); //row number of the user's information
     const name = data[row][0];//grab the user's name for greeting message
-    const lottery_id = pad(data[row][6],3); //grab the user's lottery number and convert to 3 digits
+    const lottery_id = data[row][6] ? pad(data[row][6],3):''; //grab the user's lottery number and convert to 3 digits
 
     const d0 = lottery_id.charAt(0);
     const d1 = lottery_id.charAt(1);
@@ -80,7 +80,10 @@ export default function Details({data}:any){
             </div>
             
             ) 
-            : (<h2 className="text-center text-xl font-medium text-white mt-4">暂时没有抽奖号喔～</h2>)
+            : (<div>
+              <h2 className="text-center text-2xl font-medium text-white mt-4">暂时没有抽奖号哦～请在主持人提示后刷新本页面</h2>
+              <h2 className="text-center text-xl font-medium text-white pb-3">No lottery number available currently... Please refresh after host announcement. </h2>
+              </div>)
         }
       </div>
 
