@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import {Nav} from './layout';
+import Link from 'next/link';
 
 export  async function getServerSideProps() {
   // auth
@@ -107,11 +108,11 @@ export default function Home({ data }) {
         
       </div>
       <div className="container w-full max-w-xs mx-auto my-2">
-        <a className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600 mt-3 mx-auto" href="#">
+        < Link className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600 mt-3 mx-auto" href="#">
                 没有注册？点击这里。
                 <br></br>
                 Not registered? Click here.
-        </a>
+        </Link>
       </div>
     </div>
   );
