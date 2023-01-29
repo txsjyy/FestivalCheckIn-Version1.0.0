@@ -114,7 +114,7 @@ export default function Home({ data }:any) {
         
       </div>
       <div className="container w-full max-w-xs mx-auto my-2">
-        < Link className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600 mt-3 mx-auto" href="#">
+        < Link className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600 mt-3 mx-auto" href="https://forms.gle/4PTvnKcMH4vTmPC16">
                 没有注册？点击这里。
                 <br></br>
                 Not registered? Click here.
