@@ -10,7 +10,7 @@ export  async function getServerSideProps() {
     credentials:{
     client_id: process.env.GOOGLE_CLIENT_ID,
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')      
+    private_key: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, '\n')      
     },
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
@@ -30,18 +30,18 @@ export  async function getServerSideProps() {
   };
 }
 
-export default function Home({ data }) {
+export default function Home({ data }:any) {
   const [input, setValue] = useState('');
   const [match, setMatch] = useState(true);
   const [pressed, setPressed] = useState(false);
   const router = useRouter();
   let redirect_url = "/";
 
-  const handleChange = (e) => {
+  const handleChange = (e:any) => {
     setValue(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:any) => {
     e.preventDefault();
 
     console.log(data);
@@ -85,7 +85,7 @@ export default function Home({ data }) {
               <input className="shadow appearance-none border py-2 px-3 leading-tight focus:outline-none focus:shadow-outline rounded-lg p-2 text-xl text-red-800 w-48 outline outline-offset-2 outline-2 outline-red-800"
               type="text"
               pattern="[0-9A-Za-z!@#\$%\^&\*]{4}"
-              minLength="4"
+              minLength= {4}
               value={input}
               onChange={handleChange}></input>
             </div>

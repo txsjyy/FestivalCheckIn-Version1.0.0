@@ -8,7 +8,7 @@ export  async function getServerSideProps(context:any) {
     credentials:{
       client_id: process.env.GOOGLE_CLIENT_ID,
       client_email: process.env.GOOGLE_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')     
+      private_key: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, '\n')     
       },
     scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
   const sheets = google.sheets({ version: 'v4', auth });
@@ -45,7 +45,7 @@ function pad(n: string,length: number){
   return (len > 0 ? new Array(++len).join('0') : '') + n
 }
 
-export default function Details({data}){
+export default function Details({data}:any){
     const router = useRouter();
     const row = Number(router.query.info); //row number of the user's information
     const name = data[row][0];//grab the user's name for greeting message
