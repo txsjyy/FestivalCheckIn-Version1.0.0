@@ -1,8 +1,8 @@
 import React, { use, useState } from 'react';
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
-import {Nav} from './layout';
 import Link from 'next/link';
+import Nav from './layout';
 
 export  async function getServerSideProps() {
   // auth
