@@ -2,42 +2,49 @@ import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import {Nav} from './layout';
 
-export  async function getServerSideProps({query}) {
-    // authorization
-    const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
-    const sheets = google.sheets({ version: 'v4', auth });
-  
-    // query read data for sheets, grabbing everything from name to id
-    const range = 'test!D2:J302';
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: process.env.SHEET_ID,
-      range,
-    });
-
-    //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
-    const sheet_row = String(Number(query.info)+2);
-    await sheets.spreadsheets.values.append({
-        spreadsheetId: process.env.SHEET_ID,
-        range: "test!K"+sheet_row,
-        valueInputOption: "USER_ENTERED",
-        resource:{
-            values: [[true]]
-        },
-    })
-
-    // return the data 
-    const data = response.data.values;
-    return {
-      props: {
-        data,
+export  async function getServerSideProps(context) {  
+  // authorization
+  const auth = await google.auth.getClient({ 
+    credentials:{
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      client_email: process.env.GOOGLE_CLIENT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')     
       },
-    };
-  }
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  // query read data for sheets, grabbing everything from name to id
+  const range = 'test!D2:J302';
+  const response = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.SHEET_ID,
+    range,
+  });
+
+  //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
+  const sheet_row = String(Number(context.query.info)+2);
+  await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.SHEET_ID,
+      range: "test!K"+sheet_row,
+      valueInputOption: "USER_ENTERED",
+      resource:{
+          values: [[true]]
+      },
+  })
+
+  // return the data 
+  const data = response.data.values;
+  return {
+    props: {
+      data,
+    },
+  };
+}
 
 function pad(n: string,length: number){
   var len = length - (''+n).length;
   return (len > 0 ? new Array(++len).join('0') : '') + n
 }
+
 export default function Details({data}){
     const router = useRouter();
     const row = Number(router.query.info); //row number of the user's information

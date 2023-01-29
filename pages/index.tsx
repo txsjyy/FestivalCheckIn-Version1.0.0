@@ -6,7 +6,13 @@ import Link from 'next/link';
 
 export  async function getServerSideProps() {
   // auth
-  const auth = await google.auth.getClient({ scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
+  const auth = await google.auth.getClient({ 
+    credentials:{
+    client_id: process.env.GOOGLE_CLIENT_ID,
+    client_email: process.env.GOOGLE_CLIENT_EMAIL,
+    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/gm, '\n')      
+    },
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
   const sheets = google.sheets({ version: 'v4', auth });
 
   // query
