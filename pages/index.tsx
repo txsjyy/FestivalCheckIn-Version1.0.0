@@ -122,12 +122,12 @@ export default function Home({ data }:any) {
                 <br></br>
                 Not registered? Click here.
         </Link>
-        <Image className = "mt-5" src = "/wst.jpeg" width = {350} height = {200} alt = "Wall Street Tequila"></Image>
+        <Image className = "mt-7" src = "/wst.jpeg" width = {350} height = {200} alt = "Wall Street Tequila"></Image>
       </div>
 
-      <footer className="absolute bottom-4 w-screen text-center">
-      <span className="text-red-900">&copy; <strong>UTCSSA</strong> - Yinuo Chen, 2023.</span>
-    </footer>
+      <footer className="w-screen text-center mt-6">
+        <span className="text-red-900 text-xs">&copy; <strong>UTCSSA</strong> - Yinuo Chen, 2023.</span>
+      </footer>
 
     </div>
   );
