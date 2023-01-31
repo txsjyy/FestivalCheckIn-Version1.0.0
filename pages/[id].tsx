@@ -1,6 +1,7 @@
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import Nav from './layout';
+import Image from 'next/image';
 
 export  async function getServerSideProps(context:any) {  
   // authorization
@@ -21,6 +22,7 @@ export  async function getServerSideProps(context:any) {
   });
 
   //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
+ 
   const sheet_row = String(Number(context.query.info)+2);
   let value = [true];
   const request_body = {
@@ -29,7 +31,8 @@ export  async function getServerSideProps(context:any) {
       value
     ]
   }
-  await sheets.spreadsheets.values.append({
+
+  await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.SHEET_ID,
       range: "test!K"+sheet_row,
       valueInputOption: "USER_ENTERED",
@@ -62,15 +65,16 @@ export default function Details({data}:any){
     const d2 = lottery_id.charAt(2);
 
     //console.log(data[row]);
+    
     return(
-      <div className='bg-gradient-to-tl from-rose-400 to-orange-300 h-screen flex flex-col items-center justify-center'>
+      <div className='bg-gradient-to-t from-red-800 via-red-600 to-yellow-500 h-screen flex flex-col items-center justify-center'>
         <Nav></Nav>
         <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="480" height="219" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
         <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {name},</h1>
-        <h1 className="text-center text-2xl font-medium text-white mt-1 pb-10">Welcome, {name}</h1>
+        <h1 className="text-center text-2xl font-medium text-white mt-1 pb-2">Welcome, {name}</h1>
         {lottery_id ?
             (<div>
-              <h2 className="text-center text-2xl font-medium text-white mt-4">您的抽奖号码是：</h2>
+              <h2 className="text-center text-2xl font-medium text-white mt-1">您的抽奖号码是：</h2>
               <h2 className="text-center text-xl font-medium text-white pb-3">Your lottery number is: </h2>
               <div className="flex gap-3 justify-center">
                 <div className="font-mono text-9xl bg-slate-200 shadow-inner rounded p-2 text-center opacity-60">{d0}</div>
@@ -85,6 +89,7 @@ export default function Details({data}:any){
               <h2 className="text-center text-xl font-medium text-white pb-3">No lottery number available currently... Please refresh after host announcement. </h2>
               </div>)
         }
+        <Image className = "mt-5" src = "/weee.png" width = {300} height = {200} alt = "Weeee"></Image>
       </div>
 
     );

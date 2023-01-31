@@ -2,6 +2,7 @@ import React, { use, useState } from 'react';
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 import Nav from './layout';
 
 export  async function getServerSideProps() {
@@ -71,8 +72,10 @@ export default function Home({ data }:any) {
   return (
     <div className='bg-gradient-to-tl from-rose-400 to-orange-300 h-screen flex flex-col justify-center'>
       <Nav></Nav>
-      <h1 className="text-center text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-12 pt-0">欢迎来到UTCSSA兔年新春晚会！</h1>
-      <h1 className="text-center text-2xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-1 pb-10">Welcome to the UTCSSA Spring Gala!</h1>
+      <h1 className="text-center justify-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-12 pt-0">欢迎来到UTCSSA</h1>
+      <h1 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 mb-1">2023兔年新春晚会</h1>      
+      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-1">Welcome to the UTCSSA</h1>
+      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 pb-4">2023 Spring Festival Gala!</h1>
       <div className="container w-full max-w-xs bg-white bg-opacity-50 mx-auto shadow-md">
         <form className="justify-center items-center rounded px-8 pt-6 pb-4" onSubmit={handleSubmit}>
             <div className="mb-4">
@@ -119,7 +122,13 @@ export default function Home({ data }:any) {
                 <br></br>
                 Not registered? Click here.
         </Link>
+        <Image className = "mt-5" src = "/wst.jpeg" width = {350} height = {200} alt = "Wall Street Tequila"></Image>
       </div>
+
+      <footer className="absolute bottom-4 w-screen text-center">
+      <span className="text-red-900">&copy; <strong>UTCSSA</strong> - Yinuo Chen, 2023.</span>
+    </footer>
+
     </div>
   );
 }
