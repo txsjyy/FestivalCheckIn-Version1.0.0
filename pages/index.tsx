@@ -17,7 +17,7 @@ export  async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // query
-  const range = 'reg!I2:J302';
+  const range = 'reg!I2:J500';
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range,
