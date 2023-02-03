@@ -15,7 +15,7 @@ export  async function getServerSideProps(context:any) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // query read data for sheets, grabbing everything from name to id
-  const range = 'test!D2:J302';
+  const range = 'reg!D2:J302';
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range,
@@ -26,7 +26,7 @@ export  async function getServerSideProps(context:any) {
   const sheet_row = String(Number(context.query.info)+2);
   let value = [true];
   const request_body = {
-    "range": "test!K"+sheet_row,
+    "range": "reg!K"+sheet_row,
     "values": [
       value
     ]
@@ -34,7 +34,7 @@ export  async function getServerSideProps(context:any) {
 
   await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.SHEET_ID,
-      range: "test!K"+sheet_row,
+      range: "reg!K"+sheet_row,
       valueInputOption: "USER_ENTERED",
       requestBody: request_body,
       
