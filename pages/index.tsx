@@ -17,7 +17,7 @@ export  async function getServerSideProps() {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // query
-  const range = 'reg!I2:J500';
+  const range = 'A2:J500';
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range,
@@ -49,7 +49,7 @@ export default function Home({ data }:any) {
     setPressed(true);
     //check match for lottery number, if found then redirect
     for (let i = 0; i < data.length; i++) {
-      if (data[i][0] === input) {
+      if (data[i][2] === input) {
         setMatch(true);
         redirect_url += input;
         redirect_url = redirect_url.replaceAll('%',',');
@@ -87,7 +87,7 @@ export default function Home({ data }:any) {
               </label>
               <input className="shadow appearance-none border py-2 px-3 leading-tight focus:outline-none focus:shadow-outline rounded-lg p-2 text-xl text-red-800 w-48 outline outline-offset-2 outline-2 outline-red-800"
               type="text"
-              pattern="[0-9A-Za-z!@#\$%\^&\*]{4}"
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}"
               minLength= {4}
               value={input}
               onChange={handleChange}></input>

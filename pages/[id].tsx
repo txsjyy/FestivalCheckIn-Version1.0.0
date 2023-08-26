@@ -15,7 +15,7 @@ export  async function getServerSideProps(context:any) {
   const sheets = google.sheets({ version: 'v4', auth });
 
   // query read data for sheets, grabbing everything from name to id
-  const range = 'reg!D2:J500';
+  const range = 'A2:J500';
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range,
@@ -26,7 +26,7 @@ export  async function getServerSideProps(context:any) {
   const sheet_row = String(Number(context.query.info)+2);
   let value = [true];
   const request_body = {
-    "range": "reg!K"+sheet_row,
+    "range": "H"+sheet_row,
     "values": [
       value
     ]
@@ -34,7 +34,7 @@ export  async function getServerSideProps(context:any) {
 
   await sheets.spreadsheets.values.update({
       spreadsheetId: process.env.SHEET_ID,
-      range: "reg!K"+sheet_row,
+      range: "H"+sheet_row,
       valueInputOption: "USER_ENTERED",
       requestBody: request_body,
       
@@ -58,7 +58,7 @@ export default function Details({data}:any){
     const router = useRouter();
     const row = Number(router.query.info); //row number of the user's information
     const name = data[row][0];//grab the user's name for greeting message
-    const lottery_id = data[row][6] ? pad(data[row][6],3):''; //grab the user's lottery number and convert to 3 digits
+    const lottery_id = data[row][8] ? pad(data[row][8],3):''; //grab the user's lottery number and convert to 3 digits
 
     const d0 = lottery_id.charAt(0);
     const d1 = lottery_id.charAt(1);
@@ -69,7 +69,7 @@ export default function Details({data}:any){
     return(
       <div className='bg-gradient-to-t from-red-800 via-red-600 to-yellow-500 h-screen flex flex-col items-center justify-center'>
         <Nav></Nav>
-        <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="480" height="219" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
+        <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="100%" height="219" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
         <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {name},</h1>
         <h1 className="text-center text-2xl font-medium text-white mt-1 pb-2">Welcome, {name}</h1>
         {lottery_id ?
