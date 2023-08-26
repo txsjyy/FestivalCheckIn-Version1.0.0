@@ -73,17 +73,17 @@ export default function Home({ data }:any) {
     <div className='bg-gradient-to-tl from-rose-400 to-orange-300 h-screen flex flex-col justify-center'>
       <Nav></Nav>
       <h1 className="text-center justify-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-12 pt-0">欢迎来到UTCSSA</h1>
-      <h1 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 mb-1">2023兔年新春晚会</h1>      
+      <h1 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 mb-1">2023新秋晚会</h1>      
       <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-1">Welcome to the UTCSSA</h1>
-      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 pb-4">2023 Spring Festival Gala!</h1>
+      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 pb-4">2023 Mid Autumn Gala!</h1>
       <div className="container w-full max-w-xs bg-white bg-opacity-50 mx-auto shadow-md">
         <form className="justify-center items-center rounded px-8 pt-6 pb-4" onSubmit={handleSubmit}>
             <div className="mb-4">
               <label className=" block text-gray-700 text-lg font-bold pb-2">
-              请输入4位数邀请码
+              请输入报名邮箱
               </label>
               <label className=" block text-gray-700 text-sm font-bold mb-2 pb-2">
-              Input 4-digit Invitation Code
+              Please enter registration email
               </label>
               <input className="shadow appearance-none border py-2 px-3 leading-tight focus:outline-none focus:shadow-outline rounded-lg p-2 text-xl text-red-800 w-48 outline outline-offset-2 outline-2 outline-red-800"
               type="text"
@@ -126,7 +126,7 @@ export default function Home({ data }:any) {
       </div>
 
       <footer className="w-screen text-center mt-6">
-        <span className="text-red-900 text-xs">&copy; <strong>UTCSSA</strong> - Yinuo Chen, 2023.</span>
+        <span className="text-red-900 text-xs">&copy; <strong>UTCSSA</strong> - Junyu Yao, Yinuo Chen, 2023.</span>
       </footer>
 
     </div>
