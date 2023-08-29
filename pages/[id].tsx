@@ -57,7 +57,8 @@ function pad(n: string,length: number){
 export default function Details({data}:any){
     const router = useRouter();
     const row = Number(router.query.info); //row number of the user's information
-    const name = data[row][0];//grab the user's name for greeting message
+    const Cname = data[row][2];//grab the user's Chinese name for greeting message
+    const Ename = data[row][3];//grab the user's English name for greeting message
     const lottery_id = data[row][8] ? pad(data[row][8],3):''; //grab the user's lottery number and convert to 3 digits
 
     const d0 = lottery_id.charAt(0);
@@ -70,8 +71,8 @@ export default function Details({data}:any){
       <div className='bg-gradient-to-t from-red-800 via-red-600 to-yellow-500 h-screen flex flex-col items-center justify-center'>
         <Nav></Nav>
         <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="100%" height="219" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
-        <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {name},</h1>
-        <h1 className="text-center text-2xl font-medium text-white mt-1 pb-2">Welcome, {name}</h1>
+        <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {Cname},</h1>
+        <h1 className="text-center text-2xl font-medium text-white mt-1 pb-2">Welcome, {Ename}</h1>
         {lottery_id ?
             (<div>
               <h2 className="text-center text-2xl font-medium text-white mt-1">您的抽奖号码是：</h2>
