@@ -1,46 +1,137 @@
+// import { google } from 'googleapis';
+// import { useRouter } from 'next/router';
+// import Nav from './layout';
+// import Image from 'next/image';
+
+// export  async function getServerSideProps(context:any) {  
+//   // authorization
+//   const auth = await google.auth.getClient({ 
+//     credentials:{
+//       client_id: process.env.GOOGLE_CLIENT_ID,
+//       client_email: process.env.GOOGLE_CLIENT_EMAIL,
+//       private_key: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, '\n')     
+//       },
+//     scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
+//   const sheets = google.sheets({ version: 'v4', auth });
+
+//   // query read data for sheets, grabbing everything from name to id
+//   const range = 'A2:J500';
+//   const response = await sheets.spreadsheets.values.get({
+//     spreadsheetId: process.env.SHEET_ID,
+//     range,
+//   });
+
+
+ 
+//   const sheet_row = String(Number(context.query.info)+2);
+//   let value = [true];
+//   const request_body = {
+//     "range": "H"+sheet_row,
+//     "values": [
+//       value
+//     ]
+//   }
+
+//   await sheets.spreadsheets.values.update({
+//       spreadsheetId: process.env.SHEET_ID,
+//       range: "H"+sheet_row,
+//       valueInputOption: "USER_ENTERED",
+//       requestBody: request_body,
+      
+//   })
+
+//   // return the data 
+//   const data = response.data.values;
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
 import { google } from 'googleapis';
 import { useRouter } from 'next/router';
 import Nav from './layout';
 import Image from 'next/image';
 
 export  async function getServerSideProps(context:any) {  
-  // authorization
   const auth = await google.auth.getClient({ 
-    credentials:{
+    credentials: {
       client_id: process.env.GOOGLE_CLIENT_ID,
       client_email: process.env.GOOGLE_CLIENT_EMAIL,
       private_key: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/gm, '\n')     
       },
-    scopes: ['https://www.googleapis.com/auth/spreadsheets'] });
-  const sheets = google.sheets({ version: 'v4', auth });
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'] 
+  });
 
-  // query read data for sheets, grabbing everything from name to id
+  const sheets = google.sheets({ version: 'v4', auth });
+  const sheet_row = String(Number(context.query.info) + 2);
+
+  // Check if number already exists in column 'I'
+  const existingNumberResponse = await sheets.spreadsheets.values.get({
+    spreadsheetId: process.env.SHEET_ID,
+    range: "I"+sheet_row,
+  });
+
+  const existingNumber = existingNumberResponse.data.values ? existingNumberResponse.data.values[0][0] : null;
+
+  if (!existingNumber) {
+    // If number doesn't exist, proceed to find max and generate new number
+
+    // Get max number from column I
+    const columnIRange = 'I2:I500';
+    const columnIResponse = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.SHEET_ID,
+      range: columnIRange,
+    });
+    
+    const columnIValues = columnIResponse.data.values || [];
+    let maxNumber = Math.max(0, ...columnIValues.flat().map(Number));
+
+    const nextNumber = maxNumber + 1;
+
+    // Update column 'H'
+    const request_body_H = {
+      "range": "H"+sheet_row,
+      "values": [
+        [true]
+      ]
+    };
+    
+    await sheets.spreadsheets.values.update({
+      spreadsheetId: process.env.SHEET_ID,
+      range: "H"+sheet_row,
+      valueInputOption: "USER_ENTERED",
+      requestBody: request_body_H,
+    });
+  
+    // Update column 'I' if nextNumber is within limit
+    if (nextNumber <= 300) {
+      const request_body_I = {
+        "range": "I"+sheet_row,
+        "values": [
+          [nextNumber]
+        ]
+      };
+      
+      await sheets.spreadsheets.values.update({
+        spreadsheetId: process.env.SHEET_ID,
+        range: "I"+sheet_row,
+        valueInputOption: "USER_ENTERED",
+        requestBody: request_body_I,
+      });
+    }
+
+    // Add a delay here if you still face issues with data not being updated fast enough
+    await new Promise(res => setTimeout(res, 1000));  // 2 second delay
+  }
+
+  // Fetch updated data from sheet
   const range = 'A2:J500';
   const response = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range,
   });
 
-  //Check in variable is a boolean in column K, we write the cell value to be true whenever check in is successful
- 
-  const sheet_row = String(Number(context.query.info)+2);
-  let value = [true];
-  const request_body = {
-    "range": "H"+sheet_row,
-    "values": [
-      value
-    ]
-  }
-
-  await sheets.spreadsheets.values.update({
-      spreadsheetId: process.env.SHEET_ID,
-      range: "H"+sheet_row,
-      valueInputOption: "USER_ENTERED",
-      requestBody: request_body,
-      
-  })
-
-  // return the data 
   const data = response.data.values;
   return {
     props: {
@@ -48,6 +139,9 @@ export  async function getServerSideProps(context:any) {
     },
   };
 }
+
+// ... Rest of your code (unchanged)
+
 
 function pad(n: string,length: number){
   var len = length - (''+n).length;
