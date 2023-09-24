@@ -64,7 +64,7 @@ export default function Details({ data }: any) {
     <div className='bg-gradient-to-t from-red-800 via-red-600 to-yellow-500 h-screen flex flex-col items-center justify-center'>
       <Nav></Nav>
       <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="100%" height="219" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
-      <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {Cname},</h1>
+      <h1 className="text-center text-3xl font-medium text-white mt-12 pt-0">您好 {Ename},</h1>
       <h1 className="text-center text-2xl font-medium text-white mt-1 pb-2">Welcome, {Ename}</h1>
       {lottery_id ?
         (<div>
