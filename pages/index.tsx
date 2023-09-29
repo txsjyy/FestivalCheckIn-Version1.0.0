@@ -49,7 +49,7 @@ export default function Home({ data }:any) {
     setPressed(true);
     //check match for lottery number, if found then redirect
     for (let i = 0; i < data.length; i++) {
-      if (data[i][1].toLowerCase() === input.toLowerCase()) {
+      if (data[i][1].trim().toLowerCase() === input.toLowerCase()) {
         setMatch(true);
         redirect_url += input;
         redirect_url = redirect_url.replaceAll('%',',');
