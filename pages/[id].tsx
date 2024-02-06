@@ -52,8 +52,7 @@ function pad(n: string, length: number) {
 export default function Details({ data }: any) {
   const router = useRouter();
   const row = Number(router.query.info);
-  const Cname = data[row][2];
-  const Ename = data[row][3];
+  const Fname = data[row][4];
   const lottery_id = data[row][8] ? pad(data[row][8], 3) : '';
 
   const d0 = lottery_id.charAt(0);
@@ -65,8 +64,8 @@ export default function Details({ data }: any) {
       <Nav></Nav>
       <div className="absolute inset-0 z-10"></div>
       <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="100%" height="219"  className="giphy-embed absolute top-10 w-full" allowFullScreen></iframe>
-      <h1 className="text-center text-3xl font-medium text-black mt-12 pt-0">您好 {Ename},</h1>
-      <h1 className="text-center text-2xl font-medium text-black mt-1 pb-2">Welcome, {Ename}</h1>
+      <h1 className="text-center text-3xl font-medium text-black mt-12 pt-0">您好 {Fname},</h1>
+      <h1 className="text-center text-2xl font-medium text-black mt-1 pb-2">Welcome, {Fname}</h1>
       {lottery_id ?
         (<div>
           <h2 className="text-center text-2xl font-medium text-black mt-1">您的抽奖号码是：</h2>
