@@ -72,17 +72,17 @@ export default function Home({ data }:any) {
   return (
     <div className='bg-MidAutumnBg h-screen flex flex-col justify-center' >
       <Nav></Nav>
-      <h1 className="text-center justify-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-12 pt-0">欢迎来到UTCSSA</h1>
-      <h1 className="text-center text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 mb-1">2024新春晚会</h1>      
-      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 mt-1">Welcome to the UTCSSA</h1>
-      <h1 className="text-center text-xl font-medium text-transparent bg-clip-text bg-gradient-to-r to-amber-600 from-red-700 pt-0 pb-4">2024 New Year Gala!</h1>
+      <h1 className="text-center justify-center text-2xl font-extrabold text-orange-200 mt-12 pt-0">欢迎来到UTCSSA</h1>
+      <h1 className="text-center text-2xl font-extrabold text-orange-200  pt-0 mb-1">2024新春晚会</h1>      
+      <h1 className="text-center text-xl font-medium text-orange-200 mt-1">Welcome to the UTCSSA</h1>
+      <h1 className="text-center text-xl font-medium text-orange-200 pt-0 pb-4">2024 New Year Gala!</h1>
       <div className="container w-full max-w-xs bg-white bg-opacity-50 mx-auto shadow-md">
         <form className="justify-center items-center rounded px-8 pt-6 pb-4" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className=" block text-gray-700 text-lg font-bold pb-2">
+              <label className=" block text-orange-200 text-lg font-bold pb-2">
               请输入报名邮箱
               </label>
-              <label className=" block text-gray-700 text-sm font-bold mb-2 pb-2">
+              <label className=" block text-orange-200 text-sm font-bold mb-2 pb-2">
               Please enter registration email
               </label>
               <input className="shadow appearance-none border py-2 px-3 leading-tight focus:outline-none focus:shadow-outline rounded-lg p-2 text-xl text-red-800 w-48 outline outline-offset-2 outline-2 outline-red-800"
@@ -117,7 +117,7 @@ export default function Home({ data }:any) {
         
       </div>
       <div className="container w-full max-w-xs mx-auto my-2">
-        < Link className="inline-block align-baseline font-bold text-sm text-red-900 hover:text-red-600 mt-3 mx-auto" href="https://docs.google.com/forms/d/e/1FAIpQLScn5-ikrSBlFlYIzPMA11kmJt4NOmqauO7VqTlu3X6X2Mp7TA/viewform?usp=sf_link">
+        < Link className="inline-block align-baseline font-bold text-orange-200 text-xs mt-3 mx-auto" href="https://docs.google.com/forms/d/e/1FAIpQLScn5-ikrSBlFlYIzPMA11kmJt4NOmqauO7VqTlu3X6X2Mp7TA/viewform?usp=sf_link">
                 没有注册？点击这里。
                 <br></br>
                 Not registered? Click here.
@@ -126,7 +126,7 @@ export default function Home({ data }:any) {
       </div>
 
       <footer className="w-screen text-center mt-6">
-        <span className="text-red-900 text-xs">&copy; <strong>UTCSSA</strong> - Junyu Yao and Tech Department , 2024.</span>
+        <span className="text-orange-200 text-xs">&copy; <strong>UTCSSA</strong> - Junyu Yao and Tech Department , 2024.</span>
       </footer>
 
     </div>

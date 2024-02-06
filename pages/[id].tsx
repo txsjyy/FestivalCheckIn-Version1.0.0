@@ -64,12 +64,12 @@ export default function Details({ data }: any) {
       <Nav></Nav>
       <div className="absolute inset-0 z-10"></div>
       <iframe src="https://giphy.com/embed/iehOstHSrp1XUYvXFZ" width="100%" height="219"  className="giphy-embed absolute top-10 w-full" allowFullScreen></iframe>
-      <h1 className="text-center text-3xl font-medium text-black mt-12 pt-0">您好 {Fname},</h1>
-      <h1 className="text-center text-2xl font-medium text-black mt-1 pb-2">Welcome, {Fname}</h1>
+      <h1 className="text-center text-3xl font-medium  text-orange-200 mt-12 pt-0">您好 {Fname},</h1>
+      <h1 className="text-center text-2xl font-medium  text-orange-200 mt-1 pb-2">Welcome, {Fname}</h1>
       {lottery_id ?
         (<div>
-          <h2 className="text-center text-2xl font-medium text-black mt-1">您的抽奖号码是：</h2>
-          <h2 className="text-center text-xl font-medium text-black pb-3">Your lottery number is: </h2>
+          <h2 className="text-center text-2xl font-medium text-orange-200 mt-1">您的抽奖号码是：</h2>
+          <h2 className="text-center text-xl font-medium text-orange-200 pb-3">Your lottery number is: </h2>
           <div className="flex gap-3 justify-center">
             <div className="font-mono text-9xl bg-slate-200 shadow-inner rounded p-2 text-center opacity-60">{d0}</div>
             <div className="font-mono text-9xl bg-slate-200 shadow-inner rounded p-2 text-center opacity-60">{d1}</div>
@@ -78,8 +78,8 @@ export default function Details({ data }: any) {
         </div>
         )
         : (<div>
-          <h2 className="text-center text-2xl font-medium text-black mt-4">暂时没有抽奖号哦～请在主持人提示后刷新本页面</h2>
-          <h2 className="text-center text-xl font-medium text-black pb-3">No lottery number available currently... Please refresh after host announcement. </h2>
+          <h2 className="text-center text-2xl font-medium text-orange-200 mt-4">暂时没有抽奖号哦～请在主持人提示后刷新本页面</h2>
+          <h2 className="text-center text-xl font-medium text-orange-200 pb-3">No lottery number available currently... Please refresh after host announcement. </h2>
         </div>)
       }
       {/* <Image className="mt-5" src="/weee.png" width={300} height={200} alt="Weeee"></Image> */}
